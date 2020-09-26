@@ -8,21 +8,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestShouldDownloadFileFromTheAPI(t *testing.T) {
-	api := NewAWSIPRangeAPI()
-
-	data, err := api.Download()
-
-	assert.Nil(t, err)
-	assert.NotNil(t, data)
-}
-
 func TestShouldUnmarshalJsonMessage(t *testing.T) {
-	api := NewAWSIPRangeAPI()
-	expectedResult := AWSIPAddressRanges{
+	unmarshaller := NewUnmarshaller()
+	expectedResult := IPAddressRanges{
 		SyncToken:  "1598568675",
 		CreateDate: "2020-08-27-22-51-15",
-		Prefixes: []AWSIPPrefix{
+		Prefixes: []IPPrefix{
 			{
 				IPPrefix: "35.180.0.0/16",
 				Region:   "eu-west-3",
@@ -39,7 +30,7 @@ func TestShouldUnmarshalJsonMessage(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, input)
 
-	result, err := api.Unmarshal(input)
+	result, err := unmarshaller.Unmarshal(input)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, result)
@@ -47,11 +38,11 @@ func TestShouldUnmarshalJsonMessage(t *testing.T) {
 }
 
 func TestShouldFailToUnmarshalJsonMessageWhenMessageIsNotAValidJSON(t *testing.T) {
-	api := NewAWSIPRangeAPI()
-	expectedResult := AWSIPAddressRanges{}
+	unmarshaller := NewUnmarshaller()
+	expectedResult := IPAddressRanges{}
 	input := []byte("inalid data")
 
-	result, err := api.Unmarshal(input)
+	result, err := unmarshaller.Unmarshal(input)
 
 	assert.NotNil(t, err)
 	assert.NotNil(t, result)
