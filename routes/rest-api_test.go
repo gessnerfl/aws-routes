@@ -8,7 +8,7 @@ import (
 )
 
 func TestShouldDownloadFileFromTheAPI(t *testing.T) {
-	api := NewAWSIPRangeRestAPI()
+	api := NewAwsIPRangeRestAPI()
 
 	data, err := api.Download()
 
