@@ -22,4 +22,4 @@ func (ops Operations) ByName(name string) (Operation, error) {
 }
 
 //SupportedOperations slice of supported operations of the awsroutes cli
-var SupportedOperations = Operations{NewDefaultAddOperation(), &RemoveOperation{}}
+var SupportedOperations = Operations{NewDefaultAddOperation(), NewDefaultRemoveOperation()}
