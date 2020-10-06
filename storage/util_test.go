@@ -9,9 +9,9 @@ import (
 )
 
 func TestShouldReturnUserHomeWithoutTrailingSlash(t *testing.T) {
-	result, err := GetUserHome()
+	result := GetUserHome()
 
-	require.NoError(t, err)
 	require.DirExists(t, result)
 	require.Condition(t, func() bool { return !strings.HasSuffix(result, "/") })
+	require.NotEqual(t, "/tmp", result)
 }

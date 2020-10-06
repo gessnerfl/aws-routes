@@ -2,7 +2,7 @@ package operations
 
 import "fmt"
 
-//Operation interface defenition of a operation of the awsroutes CLI
+//Operation interface definition of a operation of the awsroutes CLI
 type Operation interface {
 	Name() string
 	Apply(iface string) error
@@ -22,4 +22,4 @@ func (ops Operations) ByName(name string) (Operation, error) {
 }
 
 //SupportedOperations slice of supported operations of the awsroutes cli
-var SupportedOperations = Operations{&AddOperation{}, &RemoveOperation{}}
+var SupportedOperations = Operations{NewDefaultAddOperation(), &RemoveOperation{}}

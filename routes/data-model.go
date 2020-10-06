@@ -7,6 +7,11 @@ type IPPrefix struct {
 	Service  string `json:"service"`
 }
 
+//IsRelevantService returns true if the service is relevant for routing
+func (ipPrefix IPPrefix) IsRelevantService() bool {
+	return ipPrefix.Service == "AMAZON"
+}
+
 //IPAddressRanges type representation of the response message of the AWS IP range API
 type IPAddressRanges struct {
 	SyncToken  string     `json:"syncToken"`

@@ -16,11 +16,11 @@ type AwsIPAddressRanges interface {
 }
 
 //NewDefaultAwsIPAddressRanges creates a new instance of AwsIPAddressRanges with a storage in a subfolder of the user home directory
-func NewDefaultAwsIPAddressRanges() (AwsIPAddressRanges, error) {
+func NewDefaultAwsIPAddressRanges() AwsIPAddressRanges {
 	restAPI := NewAwsIPRangeRestAPI()
 	unmarshaller := NewUnmarshaller()
-	storage, err := storage.NewStorageAtUserHome()
-	return NewAwsIPAddressRanges(restAPI, unmarshaller, storage), err
+	storage := storage.NewStorageAtUserHome()
+	return NewAwsIPAddressRanges(restAPI, unmarshaller, storage)
 }
 
 //NewAwsIPAddressRanges create a new instance of AwsIPAddressRanges with the given AwsIPRangeRestAPI, Unmarshaller, and Storage

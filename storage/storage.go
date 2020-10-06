@@ -20,12 +20,9 @@ const (
 )
 
 //NewStorageAtUserHome creates a new storage for files at the user home directory
-func NewStorageAtUserHome() (Storage, error) {
-	homeDir, err := GetUserHome()
-	if err != nil {
-		return nil, err
-	}
-	return &baseStorage{storageDir: homeDir + "/" + tempDir}, nil
+func NewStorageAtUserHome() Storage {
+	homeDir := GetUserHome()
+	return &baseStorage{storageDir: homeDir + "/" + tempDir}
 }
 
 //NewStorage creates a new storage for file at the given directory
